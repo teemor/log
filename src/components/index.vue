@@ -5,6 +5,8 @@
                @click="addlog=true"
                class="add">新增</el-button>
     <el-table :data="tableData"
+              stripe
+              border
               style="width:100%;"
               max-height="500">
       <el-table-column prop="date"

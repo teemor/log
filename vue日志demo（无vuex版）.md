@@ -65,7 +65,7 @@ axios 并不属于 vue的插件
 ```
 loadlist(){
     this.$axios.get('')
-    .then(res=》{
+    .then(res=>{
         this.dateb=res.data
     })
 }
