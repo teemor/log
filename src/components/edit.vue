@@ -2,15 +2,18 @@
   <div>
     <el-form label-width="100px"
              :model="model"
-             :rule="rules">
+             :rules="rules"
+             ref="form">
       <el-form-item label="姓名"
                     prop="user">
         <el-input v-model="model.user"></el-input>
       </el-form-item>
-      <el-form-item label="摘要">
+      <el-form-item label="摘要"
+                    prop="summary">
         <el-input v-model="model.summary"></el-input>
       </el-form-item>
-      <el-form-item label="内容">
+      <el-form-item label="内容"
+                    prop="content">
         <el-input type="textarea"
                   v-model="model.content"></el-input>
       </el-form-item>
@@ -32,9 +35,9 @@ export default {
     return {
       model: {},
       rules: {
-        user: { required: true, message: '请输入姓名', trigger: 'blur' },
-        content: { required: true, message: '请输入标题', trigger: 'blur' },
-        summary: { required: true, message: '请输入内容', trigger: 'blur' }
+        user: [{ required: true, message: '姓名', trigger: 'blur' }],
+        summary: [{ required: true, message: '请输入摘要', trigger: 'blur' }],
+        content: { required: true, message: '请输入内容', trigger: 'blur' }
       }
     }
   },
@@ -61,8 +64,12 @@ export default {
     },
     // 提交表单
     submit: function () {
-      console.log('我准备提交的值', this.data)
-      this.$emit('submit', this.model)
+      this.$refs.form.validate((val) => {
+        if (val) {
+          console.log('我准备提交的值', this.data)
+          this.$emit('submit', this.model)
+        }
+      })
     },
     // 重置表单
     reset: function () {
