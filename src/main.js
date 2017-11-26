@@ -5,10 +5,12 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import CommonUtils from '@/assets/CommonUtil.js'
 import axios from 'axios'
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.prototype.$axios = axios
+Vue.prototype.$commonUtils = CommonUtils
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

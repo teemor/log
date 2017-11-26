@@ -35,7 +35,7 @@
                width="30%"
                :visible.sync="addlog"
                v-model='tableData'>
-      <edit @submit="add" @cancel="addlog=false"></edit>
+      <edit @submit="add" @cancel="addlog=false" ref="form"></edit>
     </el-dialog>
     <el-dialog title="修改日志"
                :visible.sync="editlog"
@@ -78,6 +78,7 @@ export default {
     add (model) {
       this.$axios.post('http://qianjia.space:8000/logs', model)
         .then((res) => {
+          this.$refs.form.reset()
           this.addlog = false
           this.list()
         })
@@ -97,6 +98,10 @@ export default {
       this.$axios.put('http://qianjia.space:8000/logs/' + model._id.$oid, json)
         .then((res) => {
           this.editlog = false
+          this.$commonUtils.setMessage('success', '修改成功')
+        })
+        .catch(() => {
+          this.$commonUtils.setMessage('warning', '修改失败')
         })
     },
     del (index, row) {
@@ -108,11 +113,12 @@ export default {
         this.$axios.delete('http://qianjia.space:8000/logs/' + row._id.$oid)
           .then((res) => {
             console.log(res.data)
-            this.$message({
-              type: 'success',
-              message: '删除成功!'
-            })
+            // row.splice(index, 1)
+            this.$commonUtils.setMessage('success', '删除成功')
             this.list()
+          })
+          .catch(() => {
+            this.$commonUtils.setMessage('warning', '删除失败')
           })
         )
     }

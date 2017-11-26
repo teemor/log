@@ -74,6 +74,7 @@ export default {
     // 重置表单
     reset: function () {
       this.model = this.initModel()
+      console.log('我是清空')
     }
   }
 }
