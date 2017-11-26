@@ -17,6 +17,12 @@
         <el-input type="textarea"
                   v-model="model.content"></el-input>
       </el-form-item>
+      <el-form-item label="日期"
+                    prop="date">
+        <el-date-picker type="date" placeholder="选择日期"
+                  v-model="model.date" value-format="yyyy-MM-dd"></el-date-picker>
+      </el-form-item>
+      
       <p style="text-align:center">
         <el-button type="primary"
                    @click="submit">提交</el-button>
